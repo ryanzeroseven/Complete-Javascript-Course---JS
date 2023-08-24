@@ -272,8 +272,164 @@ console.log(irsjaad);
 console.log(
   `${irsjaad.firstName} has ${irsjaad.friends.length}, and his best friend is called ${irsjaad.friends[1]}`
 );
-*/
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // LECTURE: Object Methods
 ////////////////////////////////////////////////////////////////////////////////
+
+const irsjaad = {
+  firstName: 'Irsjaad',
+  lastName: 'Mahabier',
+  birthYear: 1991,
+  job: 'Developer',
+  friends: ['Stef', 'Daan', 'Dior'],
+  hasDriverLicense: true,
+
+  // calcAge: function (birthYear) {
+  //   return 2023 - birthYear;
+  // },
+  // calcAge: function () {
+  //   // console.log(this);
+  //   return 2023 - this.birthYear;
+  // },
+  calcAge: function () {
+    this.age = 2023 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${
+      this.job
+    }, and he has ${this.hasDriverLicense ? 'a' : 'no'} driver's license.}`;
+  },
+};
+
+console.log(irsjaad.calcAge());
+console.log(irsjaad.age);
+console.log(irsjaad.age);
+console.log(irsjaad.age);
+
+// Challenge
+// "Irsjaad is a 32-year old developer, and he has a/no driver's license."
+console.log(irsjaad.getSummary());
+
+////////////////////////////////////////////////////////////////////////////////
+// LECTURE: Iteration: The for loop
+////////////////////////////////////////////////////////////////////////////////
+
+// console.log('Lifting weights repittion 1');
+// console.log('Lifting weights repittion 2');
+// console.log('Lifting weights repittion 3');
+// console.log('Lifting weights repittion 4');
+// console.log('Lifting weights repittion 5');
+// console.log('Lifting weights repittion 6');
+// console.log('Lifting weights repittion 7');
+// console.log('Lifting weights repittion 8');
+// console.log('Lifting weights repittion 9');
+// console.log('Lifting weights repittion 10');
+
+// for loop keeps running while condition is TRUE
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repittion ${rep} 🏋🏽‍♀️`);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// LECTURE: Looping Arrays, Breaking and Continuing
+////////////////////////////////////////////////////////////////////////////////
+
+const irsjaadArray = [
+  'Irsjaad',
+  'Mahabier',
+  2023 - 1991,
+  'developer',
+  ['stef', 'daan', 'dior'],
+  true,
+];
+const types = [];
+
+// console.log(irsjaadArray[0])
+// console.log(irsjaadArray[1])
+// console.log(irsjaadArray[2])
+// console.log(irsjaadArray[3])
+// console.log(irsjaadArray[4])
+// irsjaadArray[5] does NOT exist
+
+for (let i = 0; i < irsjaadArray.length; i++) {
+  // Reading from array
+  console.log(irsjaadArray[i], typeof irsjaadArray[i]);
+
+  // Filling types array
+  // types[i] = typeof irsjaadArray[i];
+  types.push(typeof irsjaadArray[i]);
+}
+
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+  ages.push(2023 - years[i]);
+}
+console.log(ages);
+
+// continue and break
+//CONTINUE
+console.log('--- ONLY STRING ---');
+for (let i = 0; i < irsjaadArray.length; i++) {
+  if (typeof irsjaadArray[i] !== 'string') continue;
+
+  console.log(irsjaadArray[i], typeof irsjaadArray[i]);
+}
+
+console.log('--- BREAK WITH NUMBER ---');
+for (let i = 0; i < irsjaadArray.length; i++) {
+  if (typeof irsjaadArray[i] === 'number') break;
+
+  console.log(irsjaadArray[i], typeof irsjaadArray[i]);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// LECTURE: Looping Backwards and Loops in Loops
+////////////////////////////////////////////////////////////////////////////////
+const irsjaad = [
+  'Irsjaad',
+  'Mahabier',
+  2023 - 1991,
+  'developer',
+  ['stef', 'daan', 'dior'],
+  true,
+];
+for (let i = irsjaad.length - 1; i >= 0; i--) {
+  console.log(i, irsjaad[i]);
+}
+
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`------- Startig exercise ${exercise}`);
+  for (let rep = 1; rep < 6; rep++) {
+    console.log(`Exercise ${exercise}: Lifting weights repetition ${rep} 🏋🏽‍♀️`);
+  }
+}
+*/
+
+////////////////////////////////////////////////////////////////////////////////
+//LECTURE: The while Loop
+////////////////////////////////////////////////////////////////////////////////
+
+let rep = 1;
+while (rep <= 10) {
+  // console.log(`WHILE: Lifting weights repittion ${rep} 🏋🏽‍♀️`);
+  rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+console.log(dice);
+
+while (dice !== 6) {
+  console.log(`You rolled a ${dice} 🎲`);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  if (dice === 6) console.log(`Loop has ended because dice rolled ${dice}`);
+}

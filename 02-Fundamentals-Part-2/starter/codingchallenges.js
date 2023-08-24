@@ -87,3 +87,105 @@ const tips2 = [calcTip2(bills2[0]), calcTip2(bills2[1]), calcTip2(bills2[2])];
 // 4
 const totals = [bills2[0] + tips[0], bills2[1] + tips[1], bills2[2] + tips[2]];
 console.log(bills2, tips2, totals);
+
+////////////////////////////////////////////////////////////////////////////////
+// Challenge 3
+////////////////////////////////////////////////////////////////////////////////
+/* Write your code below. Good luck! 🙂 */
+const mark = {
+  fullName: 'Mark Miller',
+  mass: 78,
+  height: '1.69',
+
+  calcBMI: function () {
+    mark.bmi = mark.mass / (mark.height * mark.height);
+    return mark.bmi;
+  },
+};
+
+const john = {
+  fullName: 'John Smith',
+  mass: 92,
+  height: '1.95',
+  calcBMI: function () {
+    john.bmi = john.mass / (john.height * john.height);
+    return john.bmi;
+  },
+};
+
+console.log(mark.calcBMI());
+console.log(john.calcBMI());
+
+// NOT FINISHED
+
+//---------SOLUTION---------
+const mark2 = {
+  fullName: 'Mark Miller',
+  mass: 78,
+  height: 1.69,
+  calcBMI: function () {
+    this.bmi = this.mass / this.height ** 2;
+    return this.bmi;
+  },
+};
+
+const john2 = {
+  fullName: 'John Smith',
+  mass: 92,
+  height: 1.95,
+  calcBMI: function () {
+    this.bmi = this.mass / this.height ** 2;
+    return this.bmi;
+  },
+};
+
+mark2.calcBMI();
+john2.calcBMI();
+
+console.log(mark2.bmi, john2.bmi);
+
+if (mark2.bmi > john2.bmi) {
+  console.log(
+    `${mark2.fullName}'s BMI (${mark2.bmi}) is higher than ${john2.fullName}'s BMI (${john2.bmi})`
+  );
+} else if (john2.bmi > mark2.bmi) {
+  console.log(
+    `${john2.fullName}'s BMI (${john2.bmi}) is higher than ${mark2.fullName}'s BMI (${mark2.bmi})`
+  );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Challenge 4
+////////////////////////////////////////////////////////////////////////////////
+const calcTipCC = function (bill) {
+  return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+};
+
+const billsCC = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tipsCC = [];
+const totalsCC = [];
+// NOT FINISHED
+
+//---------SOLUTION---------
+const billsCCS = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tipsCCS = [];
+const totalsCCS = [];
+
+for (let i = 0; i < billsCCS.length; i++) {
+  const tip = calcTipCC(billsCCS[i]);
+  tipsCCS.push(tip);
+  totalsCCS.push(tip + billsCCS[i]);
+}
+console.log(billsCCS, tipsCCS, totalsCCS);
+
+const calcAverageCCS = function (arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    // sum = sum + arr[i]
+    sum += arr[i];
+  }
+  return sum / arr.length;
+};
+console.log(calcAverageCCS([2, 3, 7]));
+console.log(calcAverageCCS(totalsCCS));
+console.log(calcAverageCCS(tipsCCS));
