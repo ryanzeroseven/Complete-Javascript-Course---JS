@@ -86,3 +86,38 @@ const z = 3;
 console.log(x === window.x);
 console.log(y === window.y);
 console.log(z === window.z);
+
+// VIDEO 97
+// this
+console.log(this);
+
+const calcAgeThis = function (birthyear) {
+  console.log(2037 - birthyear);
+  console.log(this);
+};
+calcAgeThis(1991);
+
+const calcAgeArrow = birthyear => {
+  console.log(2037 - birthyear);
+  console.log(this);
+};
+calcAgeArrow(1980);
+
+const irsjaad = {
+  year: 1991,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+  },
+};
+irsjaad.calcAge();
+
+const yasmin = {
+  year: 2017,
+};
+
+yasmin.calcAge = irsjaad.calcAge;
+yasmin.calcAge();
+
+const f = irsjaad.calcAge;
+// f();
