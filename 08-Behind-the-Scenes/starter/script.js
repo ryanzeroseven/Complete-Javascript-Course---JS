@@ -122,6 +122,9 @@ yasmin.calcAge();
 const f = irsjaad.calcAge;
 // f();
 
+// VIDEO 98
+// This keyword in practice
+
 // Creating objects in the window, DO NOT USE
 // var firstName1 = 'Yasmin';
 
@@ -165,7 +168,25 @@ addExpr2(2, 5);
 addExpr2(2, 5, 8, 12);
 
 var addArrow = (a, b) => {
-  console.log(arguments);
+  // console.log(arguments);
   return a + b;
 };
 addArrow(2, 5, 8);
+
+// VIDEO 99
+// Primitive vs Reference types
+
+let age = 30; // first age is 30
+let oldAge = age; // oldAge is before the new age is set so also still 30
+age = 31; // new age is 31 but old age is still 30 because this line is after oldAge
+console.log(age);
+console.log(oldAge);
+
+const myself = {
+  name: 'Irsjaad',
+  age: 30,
+};
+const friend = myself;
+friend.age = 27;
+console.log('Friend:', friend);
+console.log('Me:', myself);
