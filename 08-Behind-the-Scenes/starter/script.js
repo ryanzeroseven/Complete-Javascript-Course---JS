@@ -190,3 +190,41 @@ const friend = myself;
 friend.age = 27;
 console.log('Friend:', friend);
 console.log('Me:', myself);
+
+// VIDEO 100
+// Primitive vs Reference types in practice
+
+// Primitive types saved in the stack
+let lastName = 'Mahabier';
+let oldLastName = lastName;
+lastName = 'Prins';
+console.log(lastName, oldLastName);
+
+// Reference types saved in the heap but does not create a new object in heap
+// point to same memory address in the stack and therefore in the heap
+const yas = {
+  firstName: 'Yas',
+  lastName: 'Prins',
+  age: 32,
+};
+const marriedYas = yas;
+marriedYas.lastName = 'Mahabier';
+console.log('Before marriage', yas);
+console.log('After marriage', marriedYas);
+
+// Copying objects
+const yas2 = {
+  firstName: 'Yas',
+  lastName: 'Prins',
+  age: 32,
+  family: ['Erwin', 'Reina'],
+};
+
+const yasCopy = Object.assign({}, yas2);
+yasCopy.lastName = 'Mahabier';
+
+yasCopy.family.push('Irsjaad');
+yasCopy.family.push('Daanisj');
+
+console.log('Before marriage', yas2);
+console.log('After marriage', yasCopy);
