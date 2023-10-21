@@ -46,6 +46,11 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2} & ${ing3}!`
     );
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
 restaurant.orderDelivery({
@@ -131,7 +136,7 @@ const {
 } = openingHours;
 console.log(o, e);
 
-// VIDEO 104
+// VIDEO 105
 // THE SPREAD OPERATOR
 
 const array = [7, 8, 9];
@@ -180,3 +185,45 @@ const restaurantCopy = { ...restaurant };
 restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurantCopy.name);
 console.log(restaurant.name);
+
+// VIDEO 106
+// Rest Pattern and Parameters
+
+// 1) DESTRUCTURING
+
+// ARRAYS
+
+// SPREAD, because on the RIGHT side of the '=' operator
+const arrayNew = [1, 2, ...[3, 4]];
+
+// REST, because on the LEFT side of the '=' operator
+// REST operations collects unused elements and places them in an array
+const [g, h, ...others] = [1, 2, 3, 4, 5];
+console.log(g, h, others); // 1 2 [3, 4, 5]
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood); //Pizza Risotto ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+
+// OBJECTS
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(weekDays);
+
+// 2) FUNCTIONS
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+add(5, 3, 7, 2, 9, 3, 4, 6);
+
+const xy = [23, 5, 7];
+add(...xy);
+
+restaurant.orderPizza('mushroom', 'onion', 'olives', 'spinach'); //mushroom [onion, olives, spinach]
+restaurant.orderPizza('mushroom'); // mushroom []
