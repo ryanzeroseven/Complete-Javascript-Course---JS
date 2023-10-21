@@ -40,6 +40,12 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} & ${ing3}!`
+    );
+  },
 };
 
 restaurant.orderDelivery({
@@ -124,3 +130,53 @@ const {
   fri: { open: o, close: e },
 } = openingHours;
 console.log(o, e);
+
+// VIDEO 104
+// THE SPREAD OPERATOR
+
+const array = [7, 8, 9];
+const badNewArr = [1, 2, array[0], array[1], array[2]];
+console.log(badNewArr);
+
+const newArr = [1, 2, ...array];
+console.log(newArr); // 1, 2, 7, 8, 9
+
+console.log(...newArr);
+console.log(1, 2, 7, 8, 9);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+
+// Join 2 or more arrays
+const fullMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(fullMenu);
+
+// Iterables: arrays, strings, maps, sets. NOT objects
+const str = 'Irsjaad';
+const letters = [...str, '', 'M.'];
+console.log(letters); //['I', 'r', 's', 'j', 'a', 'a', 'd', '', 'M.']
+console.log(...str); // I r s j a a d
+// console.log(`${...str} Mahabier`); Not possible
+
+// Real world example
+const ingredients = [
+  // prompt("Let's make pasta! Ingredient 1?"),
+  // prompt('Ingredient 2?'),
+  // prompt('Ingredient 3?'),
+];
+console.log(ingredients);
+
+restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+restaurant.orderPasta(...ingredients);
+
+// Objects
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Mario' };
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
