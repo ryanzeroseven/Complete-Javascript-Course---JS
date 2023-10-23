@@ -17,7 +17,7 @@ const openingTimes = {
   },
   [allDays[5]]: {
     open: 0, // Open 24 hours
-    close: 24,
+    close: 12 + 12,
   },
 };
 
@@ -351,3 +351,33 @@ for (const [i, el] of menu2.entries()) {
 // VIDEO 112
 // Enhanced Object Literals
 // See the restaurant object for enhanced changes to the arrays or openingTimes and no longer needing function ()
+
+// VIDEO 113
+// Optional Chaining (?)
+
+if (restaurant.openingTimes && restaurant.openingTimes.mon)
+  console.log(restaurant.openingTimes.mon.open);
+
+// console.log(restaurant.openingTimes.mon.open);
+
+// WITH optional chaining
+console.log(restaurant.openingTimes.mon?.open);
+console.log(restaurant.openingTimes?.mon?.open);
+
+// Example
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  // console.log(day);
+  const open = restaurant.openingTimes[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// Arrays
+const users = [{ name: 'Irsjaad', email: 'Hello@irsjaad.io' }];
+
+console.log(users[0]?.name ?? 'User array empty');
