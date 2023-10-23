@@ -350,3 +350,4 @@ for (const [i, el] of menu2.entries()) {
 
 // VIDEO 112
 // Enhanced Object Literals
+// See the restaurant object for enhanced changes to the arrays or openingTimes and no longer needing function ()
