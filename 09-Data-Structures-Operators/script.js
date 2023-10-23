@@ -244,7 +244,7 @@ console.log(undefined || null); // null -  undefined is a falsey value, so is nu
 console.log(undefined || 0 || '' || 'Hello' || 23 || null); // Hello - first truthy value
 
 // Practical example
-restaurant.numGuests = 23;
+// restaurant.numGuests = 23;
 const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
 console.log(guests1); // 10 - restaurant.numGuests does not exists
 
@@ -267,3 +267,14 @@ if (restaurant.orderPizza) {
 }
 
 restaurant.orderPizza && restaurant.orderPizza('bresaola', 'buratta');
+
+// VIDEO 108
+// The Nullish Coalesching Operator (??)
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests); // 10
+
+// Nullish: null and undefined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guests); // 10 - 0 or '' are seen as truthy values
