@@ -315,3 +315,20 @@ rest2.owner &&= '<ANONYMOUS>';
 
 console.log(rest1);
 console.log(rest2);
+
+// VIDEO 110
+// Coding challenge see other file
+
+// VIDEO 111
+// Looping Arrays: The for-of loop
+
+const menu2 = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu2) console.log(item);
+
+for (const [i, el] of menu2.entries()) {
+  // console.log(`${item[0] + 1}: ${item[1]}`);
+  console.log(`${i + 1}: ${el}`);
+}
+
+// console.log([...menu2.entries()]);
