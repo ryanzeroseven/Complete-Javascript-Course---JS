@@ -227,3 +227,43 @@ add(...xy);
 
 restaurant.orderPizza('mushroom', 'onion', 'olives', 'spinach'); //mushroom [onion, olives, spinach]
 restaurant.orderPizza('mushroom'); // mushroom []
+
+// VIDEO 107
+// Short circuiting (&& and ||)
+// Use ANY data type, return ANY data type, short-circuiting
+
+console.log('------ OR -------');
+// || operator returns (short-circuits) the first truth(y) value of all the operants or the last if all others are false(y)
+// Practical application = set default values
+
+console.log(3 || 'Irsjaad'); // 3
+console.log('' || 'Irsjaad'); // Irsjaad - empty string is a falsey value
+console.log(true || 0); // true - first value is true
+console.log(undefined || null); // null -  undefined is a falsey value, so is null but the first one was falsey
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); // Hello - first truthy value
+
+// Practical example
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1); // 10 - restaurant.numGuests does not exists
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('------ AND -------');
+// && operator returns (short-circuits) the first value false(y) or the last thruth(y) value if all others are truthy
+// Practical application = execute code in second operant if first operant is true
+
+console.log(0 && 'Irsjaad'); // 0
+// && operator returns the last thruthy value if all other values are true
+console.log(7 && 'Irsjaad'); // Irsjaad
+
+console.log('Hello' && 23 && null && 'Irsjaad'); // null - null is falsey value, evaluation is false and short circuits then returns null
+
+// Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushroom', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('bresaola', 'buratta');
