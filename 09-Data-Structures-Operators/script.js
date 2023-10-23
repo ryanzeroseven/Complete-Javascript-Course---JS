@@ -278,3 +278,40 @@ console.log(guests); // 10
 // Nullish: null and undefined (NOT 0 or '')
 const guestCorrect = restaurant.numGuests ?? 10;
 console.log(guests); // 10 - 0 or '' are seen as truthy values
+
+// VIDEO 109
+// Logical assignment Operators
+
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// OR (||) assigment operator: assigns value to variable if that variable is false(y)
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+
+// same as above
+// rest1.numGuests ||= 10; // 20
+// rest2.numGuests ||= 10; // 10, rest2 does not have this variable
+
+// nullish (??) assigment operator
+rest1.numGuests ??= 10; // 0
+rest2.numGuests ??= 10; // 10
+
+// AND (&&) assignment operator: assigns value to variable that has a truthy property
+// rest1.owner = rest1.owner && '<ANONYMOUS>'; // undefined, property is not available
+// rest2.owner = rest2.owner && '<ANONYMOUS>'; // <ANONYMOUS>
+
+// same as above
+rest1.owner &&= '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>';
+
+console.log(rest1);
+console.log(rest2);
