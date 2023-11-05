@@ -381,3 +381,5 @@ console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
 const users = [{ name: 'Irsjaad', email: 'Hello@irsjaad.io' }];
 
 console.log(users[0]?.name ?? 'User array empty');
+
+console.log('some test');
