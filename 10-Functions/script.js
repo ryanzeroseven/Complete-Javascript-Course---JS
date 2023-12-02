@@ -99,3 +99,111 @@ const high5 = function () {
 
 document.body.addEventListener('click', high5);
 ['Irsjaad', 'Yasmin', 'Daanisj'].forEach(high5);
+
+// VIDEO 132
+
+// Functions returning functions
+
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet('Hey');
+
+greeterHey('Irsjaad');
+
+greeterHey('Daanisj');
+
+greet('Hello')('Irsjaad');
+
+// Challenge Arrow function
+
+const greetArr = (greeting) => (name) => console.log(`${greeting} ${name}`);
+
+greetArr('Yo')('Irsjaad');
+
+// VIDEO 133
+
+// The call and apply Methods
+
+// This key pointing towards the object lufthansa
+
+const lufthansa = {
+  airline: 'Lufthansa',
+
+  iataCode: 'LH',
+
+  bookings: [],
+
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}, ${name}` });
+  },
+};
+
+lufthansa.book(239, 'Irsjaad Mahabier');
+
+lufthansa.book(579, 'Yasmin Prins');
+
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'Eurowings',
+
+  iataCode: 'EW',
+
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// the function is now a regular function no longer a method thus the 'this' keyword points to undefined.
+
+// DOES NOT WORK
+
+// book(23, 'Sarah Williams');
+
+// CALL METHOD
+
+// call function redirects the 'this' keyword
+
+book.call(eurowings, 23, 'Sara Williams');
+
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper');
+
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+
+  iataCode: 'LX',
+
+  bookings: [],
+};
+
+book.call(swiss, 693, 'Mary Condo');
+
+console.log(swiss);
+
+// APPLY METHOD
+
+const flightData = [583, 'George Cooper'];
+
+book.apply(swiss, flightData);
+
+console.log(swiss);
+
+// this is the same if you use spread instead of apply method
+
+book.call(swiss, ...flightData);
+
+// VIDEO 134
+
+// The bind Method
