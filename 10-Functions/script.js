@@ -97,7 +97,7 @@ const high5 = function () {
   console.log('🖐');
 };
 
-document.body.addEventListener('click', high5);
+document.getElementsByTagName('H1')[0].addEventListener('click', high5);
 ['Irsjaad', 'Yasmin', 'Daanisj'].forEach(high5);
 
 // VIDEO 132
@@ -207,3 +207,103 @@ book.call(swiss, ...flightData);
 // VIDEO 134
 
 // The bind Method
+// book.call(eurowings, 23, 'Sara Williams');
+// the bind method will give you a new function where the 'this' keyword is now bound to eurowings instead of lufthansa
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW(23, 'Steven Williams');
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Irsjaad Mahabier');
+bookEW23('Yasmin Prins');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application (preset parameters)
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * .23
+
+console.log(addVAT(100));
+console.log(addVAT(23));
+
+// Challenge
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100));
+console.log(addVAT2(23));
+
+// VIDEO 135
+// Coding Challenge 1 (see file)
+
+// VIDEO 136
+// Immediately Invoked Function Expressions (IIFE)
+
+// You can always call this function from any point later in the code
+const runOnce = function () {
+  console.log('This will never run again');
+};
+runOnce();
+
+// Tricking JavaScript to call it once! Put 'function' in parenthesis and end with parenthesis.
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// NOT POSSIBLE
+// console.log(isPrivate);
+
+(() => console.log('This will ALSO never run again'))();
+
+{
+  const isPrivate = 23; // not accessible outside of a block
+  var notPrivate = 46; // accessible outside of a block
+}
+// console.log(isPrivate);
+console.log(notPrivate);
+
+// VIDEO 137
+// Closures
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+// A closure gives a function access to all the variables of its parent function, even after that parent function has returned. The function keeps a reference to its outer scope, which preservers the scope chain throughout time.
+
+// A closure makes sure that a function doesn't loose connection to variables that existed at the function's birth place
+
+// A closure is like a backpack that a function carries around wherever it goes. This backpack has all the variables that were present in the environment where the function was created.
+
+console.dir(booker);
