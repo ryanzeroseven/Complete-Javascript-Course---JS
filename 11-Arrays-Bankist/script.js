@@ -123,3 +123,21 @@ console.log([...arr, ...arr2]); //['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
 //* JOIN
 console.log(letters.join(' - ')); // a - b - c - d - e - f - g - h - i - j
 //? Result is a string with a dash between each item of the array.
+
+// VIDEO 143;
+// The new at Method
+
+const arr3 = [23, 11, 64];
+console.log(arr3[0]); // array at position 0 - 23
+console.log(arr3.at(0)); // array at position 0 - 23
+
+//* Getting last element in array
+console.log(arr3[arr3.length - 1]); // 64
+console.log(arr3.slice(-1)); // new array with 64
+console.log(arr3.slice(-1)[0]); // 64
+
+//? At method, use in method chaining
+console.log(arr3.at(-1)); // 64
+
+console.log('Irsjaad'.at(0)); // I
+console.log('Irsjaad'.at(-1)); // d
