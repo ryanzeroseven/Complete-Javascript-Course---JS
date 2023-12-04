@@ -74,3 +74,52 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+// VIDEO 142;
+// Simple Array Methods
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//* SLICE (does not mutate original array)
+console.log(arr.slice(2)); // ['c', 'd', 'e']
+console.log(arr.slice(2, 4)); // ['c', 'd']
+console.log(arr.slice(-2)); //  ['d', 'e']
+console.log(arr.slice(-1)); //  ['e']
+console.log(arr.slice(1, -2)); // ['b', 'c']
+
+//? Shallow copy - either slice or spread operator. Use slice if you will use multiple methods after each other.
+console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e']
+console.log([...arr]); // ['a', 'b', 'c', 'd', 'e']
+
+//* SPLICE (mutates original array), common use case to delete elements from array.
+
+console.log(arr.splice(2)); // ['c', 'd', 'e']
+//? after splice the original array has been mutated and whats left over see below.
+console.log(arr); // ['a', 'b']
+
+//? Common use case to delete the last item in the array.
+arr.splice(-1);
+console.log(arr); // ['a']
+
+arr = ['a', 'b', 'c', 'd', 'e'];
+
+arr.splice(-1); // remove last item
+console.log(arr); // ['a', 'b', 'c', 'd']
+arr.splice(1, 2); // start at position 1, remove 2 elements
+console.log(arr); // ['a', 'd']
+
+//* REVERSE (mutates original array)
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
+console.log(arr2); // ['f', 'g', 'h', 'i', 'j']
+
+//* CONCAT (does not mutate original array)
+const letters = arr.concat(arr2);
+//? first array is concatenated with second array
+console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+console.log([...arr, ...arr2]); //['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+//* JOIN
+console.log(letters.join(' - ')); // a - b - c - d - e - f - g - h - i - j
+//? Result is a string with a dash between each item of the array.
