@@ -60,3 +60,31 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+
+const displayMovements = function (movements) {
+  //* Emptying the existing HTML of movements
+  containerMovements.innerHTML = '';
+  //? .textContent = 0 (pig game)
+
+  movements.forEach(function (mov, i) {
+    //* creating variable for template literal
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    //* creating html with the added data
+    const html = `  
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+      <div class="movements__value">${mov}</div>
+    </div>
+    `;
+
+    //* adding the html to the DOM
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+
+// console.log(containerMovements.innerHTML);
+// console.log(containerMovements.textContent);
