@@ -103,3 +103,12 @@ const createUserNames = function (accs) {
 };
 createUserNames(accounts);
 console.log(accounts);
+
+// VIDEO 153
+// Reduce Method, Display total balance
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((arr, mov) => arr + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
