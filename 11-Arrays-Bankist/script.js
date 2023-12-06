@@ -88,3 +88,18 @@ displayMovements(account1.movements);
 
 // console.log(containerMovements.innerHTML);
 // console.log(containerMovements.textContent);
+
+// VIDEO 151
+// Compute usernames
+
+const createUserNames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name.at(0))
+      .join('');
+  });
+};
+createUserNames(accounts);
+console.log(accounts);
