@@ -211,3 +211,14 @@ const totalDepositsUSD = movements
   })
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositsUSD);
+
+// VIDEO 156;
+// Coding Challenge 3
+
+// VIDEO 157;
+// The Find Method
+
+// Will not return a new array but the first element in the array that satisfies the condition
+const firstWithdrawal = movements.find((mov) => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);

@@ -138,3 +138,21 @@ const calcDisplaySummary = function (movements) {
   labelSumInterest.textContent = `€${interest} `;
 };
 calcDisplaySummary(account1.movements);
+
+// VIDEO 157;
+// The Find Method
+
+console.log(accounts);
+
+const account = accounts.find((acc) => acc.owner === 'Yasmin Prins');
+console.log(account);
+
+// for of loop
+let accountFor;
+for (const account of accounts) {
+  if (account.owner === 'Yasmin Prins') {
+    accountFor = account;
+    break;
+  }
+}
+console.log(accountFor);
