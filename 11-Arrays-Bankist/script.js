@@ -43,6 +43,7 @@ const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
 const labelTimer = document.querySelector('.timer');
+const labelErrorMessage = document.querySelector('.login__error-message');
 
 const containerApp = document.querySelector('.app');
 const containerMovements = document.querySelector('.movements');
@@ -84,7 +85,7 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+//? displayMovements(account1.movements);
 
 // console.log(containerMovements.innerHTML);
 // console.log(containerMovements.textContent);
@@ -111,25 +112,25 @@ const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((arr, mov) => arr + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
-calcDisplayBalance(account1.movements);
+//? calcDisplayBalance(account1.movements);
 
 // VIDEO 155;
 // The Magic of Chaining Methods
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `€${incomes} `;
 
-  const out = movements
+  const out = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `€${Math.abs(out)} `;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov) => mov > 0)
-    .map((deposit) => (deposit * 1.2) / 100)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       console.log(arr);
       return int >= 1;
@@ -137,7 +138,7 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `€${interest} `;
 };
-calcDisplaySummary(account1.movements);
+//? calcDisplaySummary(account1.movements);
 
 // VIDEO 157;
 // The Find Method
@@ -156,3 +157,47 @@ for (const account of accounts) {
   }
 }
 console.log(accountFor);
+
+// VIDEO 158;
+// Implementing Login
+
+//* Event handlers
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  //* Prevent form from submitting
+  e.preventDefault();
+  //? console.log('LOGIN');
+
+  currentAccount = accounts.find(
+    (acc) =>
+      acc.username.toLowerCase() === inputLoginUsername.value.toLowerCase()
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //* Display UI and message
+    labelErrorMessage.style.opacity = 0;
+    labelErrorMessage.style.visibility = 'hidden';
+    labelWelcome.textContent = `Welcome back ${currentAccount.owner
+      .split(' ')
+      .at(0)}`;
+    containerApp.style.opacity = 1;
+
+    //* Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    //* Display movements
+    displayMovements(currentAccount.movements);
+    //* Display balance
+    calcDisplayBalance(currentAccount.movements);
+    //* Display summary
+    calcDisplaySummary(currentAccount);
+
+    //? console.log('LOGGED IN');
+  } else {
+    containerApp.style.opacity = 0;
+    labelErrorMessage.style.opacity = 1;
+    labelErrorMessage.style.visibility = 'visible';
+  }
+});

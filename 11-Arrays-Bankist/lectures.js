@@ -128,7 +128,7 @@ currenciesUnique.forEach(function (value, _, map) {
 
 const eurToUsd = 1.1;
 
-// const movementsUSD = movements.map(function (mov) {
+//? const movementsUSD = movements.map(function (mov) {
 //   return mov * eurToUsd;
 // });
 
@@ -176,7 +176,7 @@ console.log(withdrawals);
 
 console.log(movements);
 
-// accumulator is like a snowball
+// *accumulator is like a snowball
 // const balance = movements.reduce(function (acc, cur, i, arr) {
 //   console.log(`Iteration ${i}: ${acc} + ${cur}`);
 //   return acc + cur;
@@ -204,9 +204,9 @@ console.log(max);
 // PIPELINE
 const totalDepositsUSD = movements
   .filter((mov) => mov > 0)
-  // .map((mov) => mov * eurToUsd)
+  //? .map((mov) => mov * eurToUsd)
   .map((mov, i, arr) => {
-    // console.log(arr);
+    //? console.log(arr);
     return mov * eurToUsd;
   })
   .reduce((acc, mov) => acc + mov, 0);
@@ -218,7 +218,7 @@ console.log(totalDepositsUSD);
 // VIDEO 157;
 // The Find Method
 
-// Will not return a new array but the first element in the array that satisfies the condition
+//* Will not return a new array but the first element in the array that satisfies the condition
 const firstWithdrawal = movements.find((mov) => mov < 0);
 console.log(movements);
 console.log(firstWithdrawal);
