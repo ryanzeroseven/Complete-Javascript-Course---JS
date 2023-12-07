@@ -197,3 +197,17 @@ const max = movements.reduce((acc, mov) => {
   else return mov;
 }, movements.at(0));
 console.log(max);
+
+// VIDEO 155;
+// The Magic of Chaining Methods
+
+// PIPELINE
+const totalDepositsUSD = movements
+  .filter((mov) => mov > 0)
+  // .map((mov) => mov * eurToUsd)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
