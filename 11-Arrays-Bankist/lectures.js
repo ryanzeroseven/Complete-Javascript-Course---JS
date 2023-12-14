@@ -222,3 +222,29 @@ console.log(totalDepositsUSD);
 const firstWithdrawal = movements.find((mov) => mov < 0);
 console.log(movements);
 console.log(firstWithdrawal);
+
+// VIDEO 161
+// Some and Every
+
+//? SOME
+console.log(movements);
+
+//* Testing for EQUALITY, true or false.
+console.log(movements.includes(-130));
+
+//* Check on CONDITION
+console.log(movements.some((mov) => mov === -130));
+
+//* Checking for any element for which the condition is true, it will be true.
+const anyDeposits = movements.some((mov) => mov > 1500);
+console.log(anyDeposits);
+
+//? EVERY
+//* If all of the elements satisfy the condition then its true
+console.log(movements.every((mov) => mov > 0)); // false
+
+// Separate callback
+const deposit = (mov) => mov < 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
