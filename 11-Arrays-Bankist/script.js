@@ -103,14 +103,24 @@ const createUserNames = function (accs) {
   });
 };
 createUserNames(accounts);
-console.log(accounts);
+// console.log(accounts);
+
+const updateUI = function (acc) {
+  //* Display movements
+  displayMovements(acc.movements);
+  //* Display balance
+  calcDisplayBalance(acc);
+  //* Display summary
+  calcDisplaySummary(acc);
+};
 
 // VIDEO 153
 // Reduce Method, Display total balance
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((arr, mov) => arr + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((arr, mov) => arr + mov, 0);
+
+  labelBalance.textContent = `${acc.balance} EUR`;
 };
 //? calcDisplayBalance(account1.movements);
 
@@ -132,7 +142,7 @@ const calcDisplaySummary = function (acc) {
     .filter((mov) => mov > 0)
     .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
-      console.log(arr);
+      // console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
@@ -143,10 +153,10 @@ const calcDisplaySummary = function (acc) {
 // VIDEO 157;
 // The Find Method
 
-console.log(accounts);
+// console.log(accounts);
 
 const account = accounts.find((acc) => acc.owner === 'Yasmin Prins');
-console.log(account);
+// console.log(account);
 
 // for of loop
 let accountFor;
@@ -156,7 +166,7 @@ for (const account of accounts) {
     break;
   }
 }
-console.log(accountFor);
+// console.log(accountFor);
 
 // VIDEO 158;
 // Implementing Login
@@ -173,7 +183,7 @@ btnLogin.addEventListener('click', function (e) {
     (acc) =>
       acc.username.toLowerCase() === inputLoginUsername.value.toLowerCase()
   );
-  console.log(currentAccount);
+  // console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     //* Display UI and message
@@ -187,17 +197,39 @@ btnLogin.addEventListener('click', function (e) {
     //* Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
-    //* Display movements
-    displayMovements(currentAccount.movements);
-    //* Display balance
-    calcDisplayBalance(currentAccount.movements);
-    //* Display summary
-    calcDisplaySummary(currentAccount);
+
+    // Update UI
+    updateUI(currentAccount);
 
     //? console.log('LOGGED IN');
   } else {
     containerApp.style.opacity = 0;
     labelErrorMessage.style.opacity = 1;
     labelErrorMessage.style.visibility = 'visible';
+  }
+});
+
+// VIDEO 159;
+// Implementing transfers
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value.toLowerCase()
+  );
+  // console.log(amount, receiverAcc);
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    // console.log('transfer valid');
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    // Update UI
+    updateUI(currentAccount);
   }
 });

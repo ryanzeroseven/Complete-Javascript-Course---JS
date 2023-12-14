@@ -1,3 +1,23 @@
 {
-  "cSpell.words": ["accs", "Bankist", "Schmedtmann"]
+  "cSpell.words": ["accs", "Bankist", "Schmedtmann"],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#81b7c6",
+    "activityBar.background": "#81b7c6",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#b04f9b",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#81b7c6",
+    "statusBar.background": "#5ea3b6",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#46899b",
+    "statusBarItem.remoteBackground": "#5ea3b6",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#5ea3b6",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#5ea3b699",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#5ea3b6"
 }
