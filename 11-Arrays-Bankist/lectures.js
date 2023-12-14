@@ -248,3 +248,16 @@ const deposit = (mov) => mov < 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+
+// VIDEO 162
+// flat and flatMap
+
+//* Remove nested arrays and flatten the array into single array, parameter to specify how deep, default = 1
+const arrFlat = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arrFlat.flat()); // (8) [1, 2, 3, 4, 5, 6, 7, 8]
+
+//* Deeper nested arrays, parameter 2
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// flatMap see script.js

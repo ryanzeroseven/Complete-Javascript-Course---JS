@@ -279,3 +279,32 @@ btnLoan.addEventListener('click', function (e) {
   }
   inputLoanAmount.value = '';
 });
+
+// VIDEO 162
+// flat and flatMap
+
+/*
+//* take out only the movement arrays
+const accountMovements = accounts.map((acc) => acc.movements);
+console.log(accountMovements);
+
+//* place all elements of the arrays in a single array
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+
+//* reduce all elements to a single element
+const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+*/
+// flat
+
+const overallBalance = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+// flatMap, combine map() and flat() but only goes 1 level deep.
+const overallBalance2 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
