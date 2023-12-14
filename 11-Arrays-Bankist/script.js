@@ -219,6 +219,7 @@ btnTransfer.addEventListener('click', function (e) {
     (acc) => acc.username === inputTransferTo.value.toLowerCase()
   );
   // console.log(amount, receiverAcc);
+  //* clear inputs
   inputTransferAmount.value = inputTransferTo.value = '';
   if (
     amount > 0 &&
@@ -231,5 +232,30 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movements.push(amount);
     // Update UI
     updateUI(currentAccount);
+  }
+});
+
+// VIDEO 160
+// The findIndex Method
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  const closeUser = inputCloseUsername.value.toLowerCase();
+  const closePin = Number(inputClosePin.value);
+
+  inputCloseUsername.value = inputClosePin.value = '';
+
+  if (
+    closeUser === currentAccount.username &&
+    closePin === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username
+    );
+    console.log(index);
+    // Delete account
+    accounts.splice(index, 1);
+    // Hide UI
+    containerApp.style.opacity = 0;
   }
 });
