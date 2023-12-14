@@ -261,3 +261,36 @@ const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 console.log(arrDeep.flat(2));
 
 // flatMap see script.js
+
+// VIDEO 163
+// Sorting Arrays
+
+//! MUTATES THE ORIGINAL
+//? Sorting converts it to strings and then sort alphabetically
+
+// Strings
+const owners = ['Irsjaad', 'Yasmin', 'Daanisj', 'Ayesha'];
+console.log(owners.sort());
+
+// Numbers
+console.log(movements);
+// console.log(movements.sort());
+
+//* return < 0, A, B (keep order)
+//* return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (b > a) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (b > a) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
