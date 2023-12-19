@@ -1,5 +1,5 @@
 /*
- * Use this CSS to learn some intersting techniques,
+ * Use this CSS to learn some interesting techniques,
  * in case you're wondering how I built the UI.
  * Have fun! 😁
  */
@@ -82,6 +82,18 @@ nav {
   outline: none;
   color: #777;
 }
+.login__error-message {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  padding-right: 3.5rem;
+  opacity: 0;
+  visibility: hidden;
+  color: red;
+  font-size: 2rem;
+  /* font-weight: 500; */
+  transition: all 0.3ms ease;
+}
 
 /* MAIN */
 .app {
@@ -93,7 +105,7 @@ nav {
   grid-template-rows: auto repeat(3, 15rem) auto;
   gap: 2rem;
 
-  /* NOTE This creates the fade in/out anumation */
+  /* NOTE This creates the fade in/out animation */
   opacity: 0;
   transition: all 1s;
 }
@@ -239,7 +251,7 @@ h2 {
   gap: 0.4rem 1rem;
 }
 
-/* Exceptions for interst */
+/* Exceptions for interest */
 .form.form--loan {
   grid-template-columns: 2.5fr 1fr 2.5fr;
 }
