@@ -294,3 +294,37 @@ console.log(movements);
 // });
 movements.sort((a, b) => b - a);
 console.log(movements);
+
+// VIDEO 164
+// More Ways of Creating and Filling Arrays
+
+const arr164 = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+const x = new Array(7);
+console.log(x); // [empty × 7]
+console.log(x.map(() => 5)); //[empty × 7]
+
+// Empty arrays + Fill method
+//* Mutates array
+// x.fill(1);
+console.log(x); // [1, 1, 1, 1, 1, 1, 1]
+
+//? specify start parameter
+// x.fill(1, 3);
+console.log(x); // [empty × 3, 1, 1, 1, 1]
+
+//? specify send parameter
+x.fill(1, 3, 5);
+console.log(x); // [empty × 3, 1, 1, empty × 2]
+
+//* Fill existing array
+arr164.fill(23, 2, 6);
+console.log(arr164); // [1, 2, 23, 23, 23, 23, 7]
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y); // [1, 1, 1, 1, 1, 1, 1]
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z); // [1, 2, 3, 4, 5, 6, 7]
