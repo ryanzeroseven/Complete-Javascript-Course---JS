@@ -339,3 +339,83 @@ labelBalance.addEventListener('click', function () {
   // const movementsUI2 = [...document.querySelectorAll('.movements__value')];
   // console.log(movementsUI2);
 });
+
+// VIDEO 166
+// Array Methods Practice
+
+// 1.
+//* First make multiple arrays into 1 new array
+//* Second filter on positive numbers
+//* Third reduce all elements to 1 element
+const bankDepositSum = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+
+// 2.
+//* First make multiple arrays into 1 new array
+//* Second filter on 1000 and up
+//* Third add .length
+const numDeposits1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov >= 1000).length;
+console.log(numDeposits1000);
+
+//* First make multiple arrays into 1 new array
+//* Second reduce, only count if the element is 1000 or more
+const numDeposits10002 = accounts
+  .flatMap((acc) => acc.movements)
+  // .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+console.log(numDeposits10002);
+
+// Prefixed ++ operator
+let a = 10;
+// console.log(a++);
+console.log(++a);
+console.log(a);
+
+// 3.
+//* First make multiple arrays into 1 new array
+//* Second reduce, make the parameter dynamic
+//* create an object on the accumulator
+const { deposits, withdrawals } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+console.log(deposits, withdrawals);
+
+// 4.
+// this is a nice title -> This Is a Nice Title
+
+//* First create function
+//* Second create variable to capitalize
+//* Third create variable with exceptions
+//* Fourth all to lowercase
+//* Fifth split the string in to an array
+//* Sixth map into new array in which each word is either capitalize when not in exception
+//* Seventh join back together
+
+const convertTitleCase = function (title) {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
