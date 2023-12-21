@@ -124,3 +124,39 @@ const transferFee1 = 15_00;
 const transferFee2 = 1_500;
 
 console.log(Number('230_000')); // NaN
+
+// VIDEO 174
+//  Working with BigInt
+
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+//* BigInt
+console.log(48921563148945141641658461684168351683168835n);
+console.log(BigInt(4892156314));
+
+// Operations
+console.log(10000n + 10000n);
+console.log(1352168131861316823153783n * 1321651516513165131851153156n);
+// console.log(Math.sqrt(16n)); //! Not possible
+
+const huge = 1213165186657851563156n;
+const num = 23;
+// console.log(huge * num); //! Error cannot mix BigInt with other types
+console.log(huge * BigInt(num));
+
+// Exceptions
+console.log(20n > 15); // true
+console.log(20n === 20); // false
+console.log(typeof 20n); // bigint
+console.log(20n == '20'); // true
+
+console.log(huge + ' is REALLY BIG');
+
+// Divisions
+console.log(10n / 3n); // 3n, cuts of the decimal
+console.log(10 / 3);
