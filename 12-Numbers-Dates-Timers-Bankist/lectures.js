@@ -126,7 +126,7 @@ const transferFee2 = 1_500;
 console.log(Number('230_000')); // NaN
 
 // VIDEO 174
-//  Working with BigInt
+// Working with BigInt
 
 console.log(2 ** 53 - 1);
 console.log(Number.MAX_SAFE_INTEGER);
@@ -160,3 +160,40 @@ console.log(huge + ' is REALLY BIG');
 // Divisions
 console.log(10n / 3n); // 3n, cuts of the decimal
 console.log(10 / 3);
+
+// VIDEO 175
+// Creating Dates
+
+// Create a date
+/*
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Dec 21 2023 11:29:03'));
+console.log(new Date('December 25, 2023'));
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+*/
+
+// Working with dates
+const future = new Date(2037, 9, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+
+console.log(new Date(2139571380000));
+
+console.log(new Date(Date.now()));
+
+future.setFullYear(2040);
+console.log(future);

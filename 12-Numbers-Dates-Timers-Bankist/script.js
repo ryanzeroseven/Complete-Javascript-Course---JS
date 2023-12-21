@@ -354,3 +354,8 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'blue';
   });
 });
+
+// VIDEO 175
+// Creating Dates
+
+console.log(new Date(account1.movementsDates[0]));
