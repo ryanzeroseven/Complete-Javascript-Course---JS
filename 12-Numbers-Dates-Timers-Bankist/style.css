@@ -41,6 +41,8 @@ nav {
 
 .login {
   display: flex;
+  /* flex-direction: column; */
+  align-items: center;
 }
 
 .login__input {
@@ -82,6 +84,7 @@ nav {
   outline: none;
   color: #777;
 }
+
 .login__error-message {
   display: flex;
   flex: 1;
