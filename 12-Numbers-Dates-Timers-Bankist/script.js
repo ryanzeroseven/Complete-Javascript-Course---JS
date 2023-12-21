@@ -80,7 +80,24 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
-const displayMovements = function (movements, sort = false) {
+//* SORTING FIX
+
+const sortMovements = function (movs, dates) {
+  const arrCombined = [],
+    sortedMovs = [],
+    sortedDates = [];
+
+  movs.forEach((el, i) => arrCombined.push([movs[i], dates[i]]));
+  arrCombined.sort((a, b) => a[0] - b[0]);
+  arrCombined.forEach((el) => {
+    sortedMovs.push(el[0]);
+    sortedDates.push(el[1]);
+  });
+
+  return [sortedMovs, sortedDates];
+};
+/////////////////////////////////////////////////
+const displayMovements = function (acc, sort = false) {
   //* Emptying the existing HTML of movements
   containerMovements.innerHTML = '';
   //? .textContent = 0 (pig game)
@@ -88,11 +105,20 @@ const displayMovements = function (movements, sort = false) {
   // VIDEO 163
   // Sorting Arrays
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const [movs, dates] = sort
+    ? sortMovements(acc.movements, acc.movementsDates)
+    : [acc.movements, acc.movementsDates];
 
   movs.forEach(function (mov, i) {
     //* creating variable for template literal
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const date = new Date(dates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+
+    const displayDate = `${day}-${month}-${year}`;
 
     //* creating html with the added data
     const html = `  
@@ -100,6 +126,7 @@ const displayMovements = function (movements, sort = false) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+     <div class="movements__date">${displayDate}</div>
       <div class="movements__value">€ ${mov.toFixed(2)}</div>
     </div>
     `;
@@ -130,7 +157,7 @@ createUserNames(accounts);
 
 const updateUI = function (acc) {
   //* Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
   //* Display balance
   calcDisplayBalance(acc);
   //* Display summary
@@ -197,6 +224,11 @@ for (const account of accounts) {
 //* Event handlers
 let currentAccount;
 
+// FAKE ALWAYS LOGIN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 1;
+
 btnLogin.addEventListener('click', function (e) {
   //* Prevent form from submitting
   e.preventDefault();
@@ -216,6 +248,17 @@ btnLogin.addEventListener('click', function (e) {
       .split(' ')
       .at(0)}`;
     containerApp.style.opacity = 1;
+
+    // VIDEO 176
+    // Adding dates to Bankist App
+
+    const now = new Date();
+    const day = `${now.getDate()}`.padStart(2, 0);
+    const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, 0);
+    const minutes = `${now.getMinutes()}`.padStart(2, 0);
+    labelDate.textContent = `${day}-${month}-${year}, ${hour}:${minutes}`;
 
     //* Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -253,6 +296,10 @@ btnTransfer.addEventListener('click', function (e) {
     // console.log('transfer valid');
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
+
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
     // Update UI
     updateUI(currentAccount);
   }
@@ -296,7 +343,8 @@ btnLoan.addEventListener('click', function (e) {
   ) {
     // Add movement
     currentAccount.movements.push(amount);
-
+    // Add loan date
+    currentAccount.movementsDates.push(new Date().toISOString());
     // Update UI
     updateUI(currentAccount);
   }
@@ -339,7 +387,7 @@ let sorted = false;
 
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
@@ -359,3 +407,18 @@ labelBalance.addEventListener('click', function () {
 // Creating Dates
 
 console.log(new Date(account1.movementsDates[0]));
+
+/*
+const sortMovements = function (movs, dates) {
+   const arrCombined = [], sortedMovs = [], sortedDates = [];
+ 
+   movs.forEach((el, i) => arrCombined.push([movs[i], dates[i]]));
+   arrCombined.sort((a, b) => a[0] - b[0]);
+   arrCombined.forEach(el => {
+      sortedMovs.push(el[0]);
+      sortedDates.push(el[1]);
+   });
+ 
+   return [sortedMovs, sortedDates];
+};
+*/
