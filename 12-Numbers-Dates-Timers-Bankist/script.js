@@ -408,17 +408,6 @@ labelBalance.addEventListener('click', function () {
 
 console.log(new Date(account1.movementsDates[0]));
 
-/*
-const sortMovements = function (movs, dates) {
-   const arrCombined = [], sortedMovs = [], sortedDates = [];
- 
-   movs.forEach((el, i) => arrCombined.push([movs[i], dates[i]]));
-   arrCombined.sort((a, b) => a[0] - b[0]);
-   arrCombined.forEach(el => {
-      sortedMovs.push(el[0]);
-      sortedDates.push(el[1]);
-   });
- 
-   return [sortedMovs, sortedDates];
-};
-*/
+// VIDEO 177
+// Adding dates to project
+//* See functions with date.
