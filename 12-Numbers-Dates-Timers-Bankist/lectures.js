@@ -108,3 +108,19 @@ console.log(isEven(8)); // true
 console.log(isEven(23)); // false
 console.log(isEven(514)); // true
 console.log(isEven(517)); // false
+
+// VIDEO 173
+// Numeric Separators
+//* The engine ignores the underscores, they can only be placed between numbers and not doubled. Only use with numbers cannot use it in strings.
+
+// 287,460,000,000
+const diameter = 287_460_000_000;
+console.log(diameter); // 287460000000
+
+const price = 345_99;
+console.log(price); // 34599
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+console.log(Number('230_000')); // NaN
