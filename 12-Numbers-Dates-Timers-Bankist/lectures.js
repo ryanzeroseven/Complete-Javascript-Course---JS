@@ -219,3 +219,28 @@ console.log(days1);
 
 // VIDEO 178
 // Internationalizing Dates (Intl)
+
+// VIDEO 179
+// Internationalizing Numbers (Intl)
+
+const num2 = 3884764.24;
+
+const options = {
+  // style: 'percentage',
+  // style: 'unit',
+  // unit: 'mile-per-hour',
+  // unit: 'celsius',
+  style: 'currency',
+  currency: 'EUR',
+  // useGrouping: false,
+};
+
+console.log('US', new Intl.NumberFormat('en-US', options).format(num2));
+console.log('UK', new Intl.NumberFormat('en-UK', options).format(num2));
+console.log('NL', new Intl.NumberFormat('nl-NL', options).format(num2));
+console.log('DE', new Intl.NumberFormat('de-DE', options).format(num2));
+console.log('SY', new Intl.NumberFormat('ar-SY', options).format(num2));
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num2)
+);
