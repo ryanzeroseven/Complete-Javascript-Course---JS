@@ -244,3 +244,36 @@ console.log(
   navigator.language,
   new Intl.NumberFormat(navigator.language, options).format(num2)
 );
+
+// VIDEO 180
+// Timers, setTimeout and setInterval
+
+// setTimeout
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} & ${ing2} 🍕`),
+  3000,
+  ...ingredients
+);
+
+console.log('Waiting...');
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval
+const clock = setInterval(function () {
+  const now = new Date();
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  };
+  console.log(new Intl.DateTimeFormat(navigator.language, options).format(now));
+}, 1000);
+
+document.querySelector('body').addEventListener('click', function () {
+  clearInterval(clock);
+});
+
+// VIDEO 181
+// Implementing a Countdown Timer

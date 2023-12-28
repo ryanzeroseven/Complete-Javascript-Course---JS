@@ -163,14 +163,14 @@ const displayMovements = function (acc, sort = false) {
 
     //* creating html with the added data
     const html = `  
-    <div class="movements__row">
+      <div class="movements__row">
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-    <div class="movements__date">${displayDate}</div>
+      <div class="movements__date">${displayDate}</div>
       <div class="movements__value">${formattedMov}</div>
-    </div>
-    `;
+      </div>
+      `;
 
     //* adding the html to the DOM
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -242,6 +242,34 @@ const calcDisplaySummary = function (acc) {
 };
 //? calcDisplaySummary(account1.movements);
 
+// VIDEO 181
+// Implementing a Countdown Timer
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    // in each call, print remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When timer expires, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Login to get started`;
+      containerApp.style.opacity = 0;
+    }
+    // Decrease 1 second
+    time--;
+  };
+
+  // Set time to 2 minutes
+  let time = 120;
+
+  // Call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 // VIDEO 157;
 // The Find Method
 
@@ -260,16 +288,17 @@ for (const account of accounts) {
 }
 // console.log(accountFor);
 
+/////////////////////////////////////////////////
 // VIDEO 158;
 // Implementing Login
 
 //* Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // FAKE ALWAYS LOGIN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 1;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 1;
 
 btnLogin.addEventListener('click', function (e) {
   //* Prevent form from submitting
@@ -328,6 +357,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // Log out timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     // Update UI
     updateUI(currentAccount);
 
@@ -364,8 +397,13 @@ btnTransfer.addEventListener('click', function (e) {
     // Add transfer date
     currentAccount.movementsDates.push(new Date().toISOString());
     receiverAcc.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -405,12 +443,21 @@ btnLoan.addEventListener('click', function (e) {
     amount > 0 &&
     currentAccount.movements.some((mov) => mov >= amount * 0.1)
   ) {
-    // Add movement
-    currentAccount.movements.push(amount);
-    // Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
-    // Update UI
-    updateUI(currentAccount);
+    // VIDEO 180
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
+
+      // Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
+
+      // Update UI
+      updateUI(currentAccount);
+
+      // Reset timer
+      clearInterval(timer);
+      timer = startLogOutTimer();
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -436,13 +483,13 @@ const overallBalance = accounts
   .map((acc) => acc.movements)
   .flat()
   .reduce((acc, mov) => acc + mov, 0);
-console.log(overallBalance);
+// console.log(overallBalance);
 
 // flatMap, combine map() and flat() but only goes 1 level deep.
 const overallBalance2 = accounts
   .flatMap((acc) => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
-console.log(overallBalance);
+// console.log(overallBalance);
 
 // VIDEO 163
 // Sorting Arrays
@@ -470,7 +517,7 @@ labelBalance.addEventListener('click', function () {
 // VIDEO 175
 // Creating Dates
 
-console.log(new Date(account1.movementsDates[0]));
+// console.log(new Date(account1.movementsDates[0]));
 
 // VIDEO 176
 // Adding dates to "Bankist" app
@@ -484,7 +531,7 @@ console.log(new Date(account1.movementsDates[0]));
 // Internationalizing Dates (Intl)
 
 /*
-// Experimenting with Intl date API
+Experimenting with Intl date API
 const now = new Date();
 const options = {
   day: 'numeric',
