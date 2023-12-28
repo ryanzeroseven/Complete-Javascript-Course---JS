@@ -179,7 +179,7 @@ console.log(new Date(3 * 24 * 60 * 60 * 1000));
 */
 
 // Working with dates
-const future = new Date(2037, 9, 19, 15, 23);
+const future = new Date(2037, 10, 19, 15, 23);
 console.log(future);
 console.log(future.getFullYear());
 console.log(future.getMonth());
@@ -197,3 +197,25 @@ console.log(new Date(Date.now()));
 
 future.setFullYear(2040);
 console.log(future);
+
+// VIDEO 176
+// Adding dates to "Bankist" app
+//* See functions with date.
+
+// VIDEO 177
+// Operations with Dates
+
+console.log(+future);
+
+const calcDaysPassed = (date1, date2) =>
+  Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+const days1 = calcDaysPassed(
+  new Date(2037, 3, 4),
+  new Date(2037, 3, 14, 10, 8)
+);
+
+console.log(days1);
+
+// VIDEO 178
+// Internationalizing Dates (Intl)

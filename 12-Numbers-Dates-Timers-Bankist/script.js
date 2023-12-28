@@ -20,10 +20,10 @@ const account1 = {
     '2019-12-23T07:42:02.383Z',
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
-    '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2023-12-23T14:11:59.604Z',
+    '2023-12-25T17:01:17.194Z',
+    '2023-12-26T23:36:17.929Z',
+    '2023-12-28T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -40,10 +40,10 @@ const account2 = {
     '2019-11-30T09:48:16.867Z',
     '2019-12-25T06:04:23.907Z',
     '2020-01-25T14:18:46.235Z',
-    '2020-02-05T16:33:06.386Z',
-    '2020-04-10T14:43:26.374Z',
-    '2020-06-25T18:49:59.371Z',
-    '2020-07-26T12:01:20.894Z',
+    '2023-12-23T14:11:59.604Z',
+    '2023-12-24T17:01:17.194Z',
+    '2023-12-25T23:36:17.929Z',
+    '2023-12-27T10:51:36.790Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -80,6 +80,9 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
+// FUNCTIONS
+
+// VIDEO 176
 //* SORTING FIX
 
 const sortMovements = function (movs, dates) {
@@ -96,7 +99,33 @@ const sortMovements = function (movs, dates) {
 
   return [sortedMovs, sortedDates];
 };
+
+// VIDEO 177
+
+const formatMovementDate = function (date, locale) {
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcDaysPassed(new Date(), date);
+  console.log(daysPassed);
+
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed < 7) return `${daysPassed} days ago`;
+  else {
+    /*
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+    */
+    // VIDEO 178
+    return new Intl.DateTimeFormat(locale).format(date);
+  }
+};
+
 /////////////////////////////////////////////////
+
 const displayMovements = function (acc, sort = false) {
   //* Emptying the existing HTML of movements
   containerMovements.innerHTML = '';
@@ -112,13 +141,9 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     //* creating variable for template literal
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-
     const date = new Date(dates[i]);
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
 
-    const displayDate = `${day}-${month}-${year}`;
+    const displayDate = formatMovementDate(date, acc.locale);
 
     //* creating html with the added data
     const html = `  
@@ -126,7 +151,7 @@ const displayMovements = function (acc, sort = false) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-     <div class="movements__date">${displayDate}</div>
+    <div class="movements__date">${displayDate}</div>
       <div class="movements__value">€ ${mov.toFixed(2)}</div>
     </div>
     `;
@@ -251,7 +276,7 @@ btnLogin.addEventListener('click', function (e) {
 
     // VIDEO 176
     // Adding dates to Bankist App
-
+    /*
     const now = new Date();
     const day = `${now.getDate()}`.padStart(2, 0);
     const month = `${now.getMonth() + 1}`.padStart(2, 0);
@@ -259,6 +284,28 @@ btnLogin.addEventListener('click', function (e) {
     const hour = `${now.getHours()}`.padStart(2, 0);
     const minutes = `${now.getMinutes()}`.padStart(2, 0);
     labelDate.textContent = `${day}-${month}-${year}, ${hour}:${minutes}`;
+*/
+
+    // VIDEO 178
+    // Internationalizing Dates
+
+    const now = new Date();
+    const options = {
+      day: 'numeric',
+      // weekday: 'long', // short or narrow
+      month: 'numeric', // long or 2-digit
+      year: 'numeric', // 2-digit
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+
+    // const locale = navigator.language;
+    // console.log(locale);
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
 
     //* Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -408,6 +455,31 @@ labelBalance.addEventListener('click', function () {
 
 console.log(new Date(account1.movementsDates[0]));
 
-// VIDEO 177
-// Adding dates to project
+// VIDEO 176
+// Adding dates to "Bankist" app
 //* See functions with date.
+
+// VIDEO 177
+// Operations with Dates
+//* See functions with date.
+
+// VIDEO 178
+// Internationalizing Dates (Intl)
+
+/*
+// Experimenting with Intl date API
+const now = new Date();
+const options = {
+  day: 'numeric',
+  weekday: 'long', // short or narrow
+  month: 'long', // numeric or 2-digit
+  year: 'numeric', // 2-digit
+  hour: 'numeric',
+  minute: 'numeric',
+};
+
+const locale = navigator.language;
+console.log(locale);
+
+labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now);
+*/
