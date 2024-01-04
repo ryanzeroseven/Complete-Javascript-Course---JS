@@ -1,12 +1,17 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
+// Document Selectors
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+const header = document.querySelector('.header');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -34,8 +39,6 @@ document.addEventListener('keydown', function (e) {
 });
 
 // VIDEO 186
-
-const header = document.querySelector('.header');
 
 const message = document.createElement('div');
 message.classList.add('cookie-message');
@@ -66,9 +69,6 @@ message.style.height =
 // VIDEO 188
 // Implementing smooth scrolling
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 btnScrollTo.addEventListener('click', function (e) {
   //* Scrolling
   section1.scrollIntoView({
@@ -76,5 +76,31 @@ btnScrollTo.addEventListener('click', function (e) {
   });
 });
 
-// VIDEO 189
-// Types of Events and Event Handlers
+// VIDEO 192
+// Event Delegation: Implementing Page Navigation
+
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// 1. Add event listener to common parent element.
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Matching strategy
+  if (
+    e.target.classList.contains('nav__link') &&
+    !e.target.classList.contains('nav__link--btn')
+  ) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// 2. Determine what element originated the event.
