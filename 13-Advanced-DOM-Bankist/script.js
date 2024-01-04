@@ -75,3 +75,6 @@ btnScrollTo.addEventListener('click', function (e) {
     behavior: 'smooth',
   });
 });
+
+// VIDEO 189
+// Types of Events and Event Handlers
