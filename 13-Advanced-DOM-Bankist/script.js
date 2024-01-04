@@ -62,3 +62,16 @@ message.style.width = '98vw';
 
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
+
+// VIDEO 188
+// Implementing smooth scrolling
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  //* Scrolling
+  section1.scrollIntoView({
+    behavior: 'smooth',
+  });
+});

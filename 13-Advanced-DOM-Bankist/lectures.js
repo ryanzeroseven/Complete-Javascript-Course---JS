@@ -44,7 +44,7 @@ console.log(div.style.height); //? '', because this only works for inline styles
 console.log(getComputedStyle(message).color); // rgb(187, 187, 187)
 console.log(getComputedStyle(message).height); // 50px
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 //* Attributes
 const logo = document.querySelector('.nav__logo');
@@ -78,3 +78,46 @@ logo.classList.contains('a');
 
 //! Don't use, it will overwrite all other classes and allows only 1 class.
 // logo.className = 'irsjaad';
+
+// VIDEO 188
+// Implementing smooth scrolling
+
+/*
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.scrollX, window.scrollY);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  //* Scrolling
+
+  //? Old Way
+  window.scrollTo(
+    s1coords.left + window.scrollX,
+    s1coords.top + window.scrollY
+  );
+  //? Old Way
+  window.scrollTo({
+    left: s1coords.left + window.scrollX,
+    top: s1coords.top + window.scrollY,
+    behavior: 'smooth',
+  });
+
+  //? New Way
+  section1.scrollIntoView({
+    behavior: 'smooth',
+  });
+});
+*/
