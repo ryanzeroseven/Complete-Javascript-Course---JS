@@ -1,6 +1,7 @@
 'use strict';
 
 // Document Selectors
+
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -90,6 +91,9 @@ btnScrollTo.addEventListener('click', function (e) {
 // });
 
 // 1. Add event listener to common parent element.
+
+// 2. Determine what element originated the event.
+
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -103,4 +107,35 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
-// 2. Determine what element originated the event.
+// VIDEO 194
+// Building a tabbed component
+
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// tabs.forEach((t) => t.addEventListener('click', () => console.log('TAB')));
+
+tabContainer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const clicked = e.target.closest('.operations__tab');
+  // console.log(clicked);
+
+  // Guard clause
+  if (!clicked) return;
+
+  // Remove active classes for tab and content
+  tabs.forEach((t) => {
+    t.classList.remove('operations__tab--active');
+  });
+  tabsContent.forEach((c) => c.classList.remove('operations__content--active'));
+
+  // Activate tab
+  clicked.classList.add('operations__tab--active');
+
+  // Active content area
+  // console.log(clicked.dataset.tab);
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
